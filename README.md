@@ -1,3 +1,3 @@
-# Primer on three.js 
+# Primer on Tensorflow in the Browser
 
-A simple primer on three.js
+A quick introduction on how to use tensorflow.js in the browser for machine learning - linear regression with batch gradient descent, adam optimizer, and a simple square mean error as the loss function.

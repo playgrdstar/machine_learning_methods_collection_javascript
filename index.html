@@ -1,114 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>three.js base</title>
-        <style>
-        </style>
-    </head>
-    <body>
-        <script type="text/javascript" src="./three.js"></script>
-        <script type="text/javascript" src="./OrbitControls.js"></script>
+<html>
 
-        <script>
+<head>
+  <meta charset="UTF-8">
+  <title>Tensorflow in the Browser | Linear Regression </title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.0"> </script>
+    <!-- <script src="https://unpkg.com/ml5@0.1.1/dist/ml5.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.8/d3.min.js" type="text/JavaScript"></script>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+     <script src="https://unpkg.com/mathjs@5.2.0/dist/math.min.js" type="text/JavaScript"></script>  
 
-            var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 10, 1000 );
-            camera.position.z = 30;
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js" type="text/JavaScript"></script>  
 
-            var renderer = new THREE.WebGLRenderer( { antialias: true } );
-            renderer.setPixelRatio( window.devicePixelRatio );
-            renderer.setSize( window.innerWidth, window.innerHeight );
-            renderer.setClearColor( 0xCC7FE0, 1 );
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
 
-            document.body.appendChild( renderer.domElement );
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-            var orbit = new THREE.OrbitControls( camera, renderer.domElement );
-            orbit.enableZoom = false;
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-            var ambientLight  = new THREE.AmbientLight( '#FFE7FF' ),
-                hemiLight     = new THREE.HemisphereLight('#FFE7FF', '#FFE7FF', 0.5 ),
-                light         = new THREE.PointLight( '#FFE7FF', 1, 100 );
+<style>
+/* Style of axis */
+body {
+  background-color: #015077;
+}
 
-            hemiLight.position.set( 0, 0, 10 );
-            light.position.set( 0, 0, 0 );
+/*To center (horizontally and vertically) the contents of the div*/
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-            scene.add( hemiLight );
-            scene.add( light );
+/*Style for the headers*/
+h5, h6 {
+  color: #FFFFFF;
+}
 
-            var group = new THREE.Group();
+.axis line {
+  stroke: #A7C6DA;
+}
 
-            var geometry = new THREE.SphereGeometry( 3, 32, 32 );
-            var material = new THREE.MeshBasicMaterial( { color: 0xffffff, opacity:0.7, transparent:true } );
-            var sphere_one = new THREE.Mesh( geometry, material );
-            sphere_one.position.x = 0;
-            sphere_one.position.y = 0;
-            sphere_one.position.z = 0;
-            group.add( sphere_one );
+.axis path {
+  stroke: none;
+}
 
+.axis text {
+  fill: #A7C6DA;
+}
+</style>
+</head>
 
-            var geometry = new THREE.SphereGeometry( 2, 32, 32 );
-            var material = new THREE.MeshPhongMaterial( { color: 0xE74C3C } );
-            var sphere_two = new THREE.Mesh( geometry, material );
-            sphere_two.position.x = 7*Math.cos(30);
-            sphere_two.position.y = 7*Math.sin(30);
-            sphere_two.position.z = 0;
-            group.add( sphere_two );
+<body>
+<div class='row'>
+  <div class="col-xs-12">
+    <p>
+      <h5>TENSORFLOW IN BROWSER</h5>
+    </p>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-xs-12">
+    <p>
+      <h6>Linear Regression | Adam Optimizer | Batch Gradient | Mean Squared Error | D3 </h6>
+    </p>
+  </div>
+</div>
+<div class='row'>
+  <div class="col-xs-6" id = 'd3canvas1'>
+  </div>
+  <div class="col-xs-6" id = 'd3canvas2'>
+  </div>
+</div>
 
+  <script src="data.js"></script>
+  <script src="regression2.js"></script>
+</body>
 
-            var geometry = new THREE.SphereGeometry( 2, 32, 32 );
-            var material = new THREE.MeshLambertMaterial( { color: 0xFFE7FF } );
-            var sphere_three = new THREE.Mesh( geometry, material );
-            sphere_three.position.x = 9*Math.cos(45);
-            sphere_three.position.y = 9*Math.sin(45);
-            sphere_three.position.z = 0;
-            group.add( sphere_three );
-
-            var geometry = new THREE.SphereGeometry( 2, 32, 32 );
-            var material = new THREE.MeshToonMaterial( { color: 0x3D98DB, opacity:0.8, transparent:true } );
-            var sphere_four = new THREE.Mesh( geometry, material );
-            sphere_four.position.x = 11*Math.cos(60);
-            sphere_four.position.y = 11*Math.sin(60);
-            sphere_four.position.z = 0;
-            group.add( sphere_four );
-
-            var geometry = new THREE.SphereGeometry( 2, 32, 32 );
-            var material = new THREE.MeshToonMaterial( { color: 0x2980B9, opacity:0.1, transparent:true, wireframe:true } );
-            var sphere_five = new THREE.Mesh( geometry, material );
-            sphere_five.position.x = 13*Math.cos(75);
-            sphere_five.position.y = 13*Math.sin(75);
-            sphere_five.position.z = 0;
-            group.add( sphere_five );
-
-            scene.add( group );
-
-
-            var prevFog = true;
-
-            var render = function () {
-
-                requestAnimationFrame( render );
-                orbit.update();
-                group.rotation.x += 0.03;
-                group.rotation.y += 0.02;
-                group.rotation.z += 0.01;
-               
-
-                renderer.render( scene, camera );
-
-            };
-
-            window.addEventListener( 'resize', function () {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize( window.innerWidth, window.innerHeight );
-
-            }, false );
-
-
-            render();
-
-        </script>
-    </body>
 </html>
