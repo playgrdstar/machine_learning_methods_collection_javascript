@@ -1,3 +1,13 @@
-# Primer on Tensorflow in the Browser
+# A collection of machine learning methods implemented in Javascript
 
-A quick introduction on how to use tensorflow.js in the browser for machine learning - linear regression with batch gradient descent, adam optimizer, and a simple square mean error as the loss function.
+I implemented a whole collection of machine learning methods in Javascript, visualised in D3.js. These include:
+- linear regression
+- linear regression with stochastic gradient descent
+- logistic regression with stochastic gradient descent
+- linear discriminant analysis
+- CART
+- naive bayes
+- KNN classifier
+- support vector machine
+- bagging
+- boosting
